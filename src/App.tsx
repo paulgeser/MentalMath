@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { AppStages } from './enum/stages.enum';
+import { Home } from './components/Home.compoent';
+import { Result } from './components/Result.component';
+import { Exercise } from './components/Exercise.component';
+import { AppDataModel, createAppDataModel } from './models/app-data.model';
 
-function App() {
+type Props = {
+};
+
+export const App: React.FC<Props> = () => {
+
+  const [state, setState] = useState<AppStages>(AppStages.HOME);
+  const [data, setData] = useState<AppDataModel>(createAppDataModel({ numExer: 15 }));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <div>
+      {state === AppStages.HOME && <Home setState={setState} data={data} setData={setData} />}
+      {state === AppStages.EXERCISE && <Exercise setState={setState} data={data} setData={setData} />}
+      {state === AppStages.RESULT && <Result setState={setState} data={data} setData={setData} />}
 
-export default App;
+    </div>)
+};
