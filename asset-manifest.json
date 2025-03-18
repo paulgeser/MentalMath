@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/MentalMath/static/css/main.fc458282.css",
-    "main.js": "/MentalMath/static/js/main.7ae6ecd1.js",
+    "main.css": "/MentalMath/static/css/main.4804e4fb.css",
+    "main.js": "/MentalMath/static/js/main.ce984254.js",
     "static/js/453.beb9426e.chunk.js": "/MentalMath/static/js/453.beb9426e.chunk.js",
     "index.html": "/MentalMath/index.html",
-    "main.fc458282.css.map": "/MentalMath/static/css/main.fc458282.css.map",
-    "main.7ae6ecd1.js.map": "/MentalMath/static/js/main.7ae6ecd1.js.map",
+    "main.4804e4fb.css.map": "/MentalMath/static/css/main.4804e4fb.css.map",
+    "main.ce984254.js.map": "/MentalMath/static/js/main.ce984254.js.map",
     "453.beb9426e.chunk.js.map": "/MentalMath/static/js/453.beb9426e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fc458282.css",
-    "static/js/main.7ae6ecd1.js"
+    "static/css/main.4804e4fb.css",
+    "static/js/main.ce984254.js"
   ]
 }
