@@ -2,7 +2,7 @@
   "name": "mental-math",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://paulgeser.github.io/Math-Mental",
+  "homepage": "https://paulgeser.github.io/MentalMath",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
