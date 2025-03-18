@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Math-Mental/static/css/main.fc458282.css",
-    "main.js": "/Math-Mental/static/js/main.792f7ea1.js",
-    "static/js/453.beb9426e.chunk.js": "/Math-Mental/static/js/453.beb9426e.chunk.js",
-    "index.html": "/Math-Mental/index.html",
-    "main.fc458282.css.map": "/Math-Mental/static/css/main.fc458282.css.map",
-    "main.792f7ea1.js.map": "/Math-Mental/static/js/main.792f7ea1.js.map",
-    "453.beb9426e.chunk.js.map": "/Math-Mental/static/js/453.beb9426e.chunk.js.map"
+    "main.css": "/MentalMath/static/css/main.fc458282.css",
+    "main.js": "/MentalMath/static/js/main.b466532e.js",
+    "static/js/453.beb9426e.chunk.js": "/MentalMath/static/js/453.beb9426e.chunk.js",
+    "index.html": "/MentalMath/index.html",
+    "main.fc458282.css.map": "/MentalMath/static/css/main.fc458282.css.map",
+    "main.b466532e.js.map": "/MentalMath/static/js/main.b466532e.js.map",
+    "453.beb9426e.chunk.js.map": "/MentalMath/static/js/453.beb9426e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fc458282.css",
-    "static/js/main.792f7ea1.js"
+    "static/js/main.b466532e.js"
   ]
 }
