@@ -1,8 +1,9 @@
 import React from 'react';
 import { AppStages } from '../enum/stages.enum';
-import { Button, Checkbox, TextField } from '@mui/material';
+import { Button, Checkbox, MenuItem, Select, TextField } from '@mui/material';
 import { AppDataModel } from '../models/app-data.model';
 import { generateExercises } from '../services/exercises-generator.service';
+import './home.component.css';
 
 type Props = {
     setState: React.Dispatch<React.SetStateAction<AppStages>>;
@@ -33,7 +34,10 @@ export const Home: React.FC<Props> = ({ setState, data, setData }) => {
                         smallAddSub: !prevState.smallAddSub
                     }))}
                 />
-                <div>
+                <div className='home-component-checkbox-text' onClick={() => setData(prevState => ({
+                    ...prevState,
+                    smallAddSub: !prevState.smallAddSub
+                }))}>
                     Kleine Addition/Subtraktion
                 </div>
             </div>
@@ -45,7 +49,10 @@ export const Home: React.FC<Props> = ({ setState, data, setData }) => {
                         smallMulDiv: !prevState.smallMulDiv
                     }))}
                 />
-                <div>
+                <div className='home-component-checkbox-text' onClick={() => setData(prevState => ({
+                    ...prevState,
+                    smallMulDiv: !prevState.smallMulDiv
+                }))}>
                     Kleine Multiplikation/Division
                 </div>
             </div>
@@ -57,7 +64,10 @@ export const Home: React.FC<Props> = ({ setState, data, setData }) => {
                         largeAddSub: !prevState.largeAddSub
                     }))}
                 />
-                <div>
+                <div className='home-component-checkbox-text' onClick={() => setData(prevState => ({
+                    ...prevState,
+                    largeAddSub: !prevState.largeAddSub
+                }))}>
                     Grosse Addition/Subtraktion
                 </div>
             </div>
@@ -69,7 +79,10 @@ export const Home: React.FC<Props> = ({ setState, data, setData }) => {
                         largeMulDiv: !prevState.largeMulDiv
                     }))}
                 />
-                <div>
+                <div className='home-component-checkbox-text' onClick={() => setData(prevState => ({
+                    ...prevState,
+                    largeMulDiv: !prevState.largeMulDiv
+                }))}>
                     Grosse Multiplikation/Division
                 </div>
             </div>
@@ -81,16 +94,33 @@ export const Home: React.FC<Props> = ({ setState, data, setData }) => {
                         square: !prevState.square
                     }))}
                 />
-                <div>
+                <div className='home-component-checkbox-text' onClick={() => setData(prevState => ({
+                    ...prevState,
+                    square: !prevState.square
+                }))}>
                     Quadrate
                 </div>
             </div>
             <div style={{ marginTop: '15px' }}>
-                <TextField id="number-exercises" label="Anzahl Aufgaben" variant="outlined" type='number' value={data.numExer}
+                <Select
+                    id="number-exercises-select"
+                    value={data.numExer}
+                    label="Age"
+                    sx={{ width: '150px' }}
                     onChange={(event: { target: { value: any; }; }) => setData(prevState => ({
                         ...prevState,
                         numExer: Number(event.target.value)
-                    }))} />
+                    }))}
+                >
+                    <MenuItem key='1' value={1}>
+                        1
+                    </MenuItem>
+                    {Array.from({ length: 20 }, (_, i) => (i + 1) * 5).map(value => (
+                        <MenuItem key={value} value={value}>
+                            {value}
+                        </MenuItem>
+                    ))}
+                </Select>
             </div>
             <div style={{ marginTop: '15px' }}>
                 <Button variant='contained' onClick={startExercises}>Next</Button>
