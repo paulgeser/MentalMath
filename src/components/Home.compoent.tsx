@@ -24,7 +24,7 @@ export const Home: React.FC<Props> = ({ setState, data, setData }) => {
 
     return <div>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-
+            <h1 style={{ textAlign: 'center' }}>Welcome to Mental Math!</h1>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <Checkbox
                     checked={data.smallAddSub}

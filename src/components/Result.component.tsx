@@ -16,14 +16,16 @@ type Props = {
 export const Result: React.FC<Props> = ({ setState, data, setData }) => {
 
     const [results, setResults] = useState<ExerciseModel[]>([]);
+    const [resultPercentage, setResultPercentage] = useState<number>(0);
 
     useEffect(() => {
         createResultTable();
     }, []);
 
     const createResultTable = () => {
-        console.log(data);
         setResults(data.exercises);
+        const correctExercises = data.exercises.filter(x => x.resultCorrect === true);
+        setResultPercentage(Math.round((correctExercises.length / data.exercises.length) * 100))
     }
 
     const backToHome = () => {
@@ -36,12 +38,14 @@ export const Result: React.FC<Props> = ({ setState, data, setData }) => {
 
     return <div>
         {results.length === 0 && <>
-            Exercise number was set to 0, so no exercises were created
+            <b>Exercise number was set to 0, so no exercises were created!!</b>
         </>}
         {results.length > 0 && <>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <p>
+                <p style={{ textAlign: 'center' }}>
                     Your results are as follows:
+                    <br />
+                    <b>{resultPercentage}%</b>
                 </p>
                 <TableContainer sx={{ maxWidth: 1000 }} component={Paper}>
                     <Table sx={{ minWidth: 350, maxWidth: 1000 }} aria-label="simple table">
@@ -85,8 +89,10 @@ export const Result: React.FC<Props> = ({ setState, data, setData }) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Button variant='contained' onClick={() => backToHome()}>Back to home</Button>
             </div>
         </>}
+        <div style={{ width: '100%', marginTop: '15px', display: 'flex', justifyContent: 'center' }}>
+            <Button variant='contained' onClick={() => backToHome()}>Back to home</Button>
+        </div>
     </div>
 };

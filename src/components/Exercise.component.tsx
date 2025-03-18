@@ -96,7 +96,9 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
                             <button onClick={evaluate} id="submit" style={{ gridColumn: 'span 3' }} >Submit</button>
                         </div>
                     </div>
-                    <Button variant='contained' onClick={() => backToHome()}>Back to home</Button>
+                    <div style={{ width: '100%', marginTop: '5px', display: 'flex', justifyContent: 'center' }}>
+                        <Button variant='contained' onClick={() => backToHome()}>Back to home</Button>
+                    </div>
                 </>
             )}
         </div>
