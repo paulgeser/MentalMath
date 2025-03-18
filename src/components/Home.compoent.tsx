@@ -23,7 +23,7 @@ export const Home: React.FC<Props> = ({ setState, data, setData }) => {
 
 
     return <div>
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
 
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <Checkbox
@@ -85,16 +85,17 @@ export const Home: React.FC<Props> = ({ setState, data, setData }) => {
                     Quadrate
                 </div>
             </div>
-            <TextField id="number-exercises" label="Anzahl Aufgaben" variant="outlined" type='number' value={data.numExer}
-                onChange={(event) => setData(prevState => ({
-                    ...prevState,
-                    numExer: Number(event.target.value)
-                }))} />
-
+            <div style={{ marginTop: '15px' }}>
+                <TextField id="number-exercises" label="Anzahl Aufgaben" variant="outlined" type='number' value={data.numExer}
+                    onChange={(event: { target: { value: any; }; }) => setData(prevState => ({
+                        ...prevState,
+                        numExer: Number(event.target.value)
+                    }))} />
+            </div>
+            <div style={{ marginTop: '15px' }}>
+                <Button variant='contained' onClick={startExercises}>Next</Button>
+            </div>
         </div>
-        <p>
-            <Button variant='contained' onClick={startExercises}>Next</Button>
-        </p>
 
     </div>;
 }

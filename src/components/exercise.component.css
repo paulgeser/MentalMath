@@ -24,4 +24,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px 0;
+}
+
+#exercise-component-exercise-display,
+#exercise-component-exercise-input {
+    border: 2px solid black;
+    padding: 20px;
+    font-size: 60px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    min-height: 80px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+    #exercise-component-numberpad>button {
+        height: 10vh;
+        min-width: 30vw;
+    }
 }

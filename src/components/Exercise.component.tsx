@@ -13,21 +13,55 @@ type Props = {
 export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
 
     const [currentExercise, setCurrentExercise] = useState<ExerciseModel | null>(null);
-    const [index, setIndex] = useState<number>(0);
+    const [exIndex, setExIndex] = useState<number>(0);
+    const [userResult, setUserResult] = useState<string>('');
+    const [background, setBackground] = useState<string>('unset');
 
     useEffect(() => {
-        console.log(data);
         setNextExercise();
     }, []);
 
     const setNextExercise = () => {
-        if (index === data.exercises.length) {
-            console.error("FINISHED WITH EXERCISES");
+        if (exIndex === data.exercises.length) {
+            setState(AppStages.RESULT);
         } else {
-            setCurrentExercise(data.exercises[index]);
-            setIndex(index + 1);
+            setCurrentExercise(data.exercises[exIndex]);
+            setExIndex(exIndex + 1);
         }
+    }
 
+    const addResultNumber = (value: number) => {
+        setUserResult(`${userResult}${value}`);
+    }
+
+    const changePosNeg = () => {
+        setUserResult(userResult.startsWith("-") ? userResult.slice(1) : "-" + userResult);
+    }
+
+    const removeLast = () => {
+        setUserResult(userResult.slice(0, -1))
+    }
+
+    const evaluate = () => {
+        if (currentExercise) {
+            const userInput = Number(userResult);
+            setData(prevState => ({
+                ...prevState,
+                exercises: prevState.exercises.map((exercise, index) =>
+                    index === (exIndex - 1)
+                        ? { ...exercise, userResult: userInput, resultCorrect: currentExercise.expectedResult === userInput } // Update only this one
+                        : exercise
+                )
+            }));
+            setUserResult('');
+            setNextExercise();
+            if (currentExercise.expectedResult === userInput) {
+                setBackground('green');
+            } else {
+                setBackground('red');
+            }
+            setTimeout(() => { setBackground('unset') }, 500);
+        }
     }
 
     return <div>
@@ -35,29 +69,27 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
         <div>
             {currentExercise!! && (
                 <>
-                    <h1>{currentExercise.display}</h1>
-                    <div id="exercise-component-numberpad-box">
+                    <h1 id='exercise-component-exercise-display'>{currentExercise.display}</h1>
+                    <h1 id='exercise-component-exercise-input'> {userResult} </h1>
+                    <div id="exercise-component-numberpad-box" style={{ background: background }}>
                         <div id="exercise-component-numberpad">
-                            <button>1</button>
-                            <button>2</button>
-                            <button>3</button>
-                            <button>4</button>
-                            <button>5</button>
-                            <button>6</button>
-                            <button>7</button>
-                            <button>8</button>
-                            <button>9</button>
-                            <button>0</button>
-                            <button>+/-</button>
-                            <button>Del</button>
-                            <button id="submit" style={{ gridColumn: 'span 3' }} >Submit</button>
+                            <button onClick={() => addResultNumber(1)}>1</button>
+                            <button onClick={() => addResultNumber(2)}>2</button>
+                            <button onClick={() => addResultNumber(3)}>3</button>
+                            <button onClick={() => addResultNumber(4)}>4</button>
+                            <button onClick={() => addResultNumber(5)}>5</button>
+                            <button onClick={() => addResultNumber(6)}>6</button>
+                            <button onClick={() => addResultNumber(7)}>7</button>
+                            <button onClick={() => addResultNumber(8)}>8</button>
+                            <button onClick={() => addResultNumber(9)}>9</button>
+                            <button onClick={() => addResultNumber(0)}>0</button>
+                            <button onClick={changePosNeg}>+/-</button>
+                            <button onClick={removeLast}>Del</button>
+                            <button onClick={evaluate} id="submit" style={{ gridColumn: 'span 3' }} >Submit</button>
                         </div>
                     </div>
                 </>
             )}
         </div>
-        <Button onClick={setNextExercise}>Submit</Button>
-
-
     </div>
 };
