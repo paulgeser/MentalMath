@@ -64,6 +64,14 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
         }
     }
 
+    const backToHome = () => {
+        setData(prevState => ({
+            ...prevState,
+            exercises: []
+        }));
+        setState(AppStages.HOME);
+    }
+
     return <div>
 
         <div>
@@ -88,6 +96,7 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
                             <button onClick={evaluate} id="submit" style={{ gridColumn: 'span 3' }} >Submit</button>
                         </div>
                     </div>
+                    <Button variant='contained' onClick={() => backToHome()}>Back to home</Button>
                 </>
             )}
         </div>

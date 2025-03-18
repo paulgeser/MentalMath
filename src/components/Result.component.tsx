@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AppDataModel, ExerciseModel } from '../models/app-data.model';
 import { AppStages } from '../enum/stages.enum';
-import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -24,6 +24,14 @@ export const Result: React.FC<Props> = ({ setState, data, setData }) => {
     const createResultTable = () => {
         console.log(data);
         setResults(data.exercises);
+    }
+
+    const backToHome = () => {
+        setData(prevState => ({
+            ...prevState,
+            exercises: []
+        }));
+        setState(AppStages.HOME);
     }
 
     return <div>
@@ -77,6 +85,7 @@ export const Result: React.FC<Props> = ({ setState, data, setData }) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Button variant='contained' onClick={() => backToHome()}>Back to home</Button>
             </div>
         </>}
     </div>
