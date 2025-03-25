@@ -12,7 +12,7 @@ type Props = {
 export const App: React.FC<Props> = () => {
 
   const [state, setState] = useState<AppStages>(AppStages.HOME);
-  const [data, setData] = useState<AppDataModel>(createAppDataModel({ numExer: 15 }));
+  const [data, setData] = useState<AppDataModel>(createAppDataModel({ numExer: 15, audioOnly: true }));
 
   return (
     <div>

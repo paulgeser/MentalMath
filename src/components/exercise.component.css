@@ -1,8 +1,9 @@
 #exercise-component-numberpad {
-    max-width: 1000px;
+    max-width: 1000px !important;
     display: grid;
     grid-template-columns: auto auto auto;
     background-color: dodgerblue;
+    width: 60vw;
     padding: 10px;
 }
 
@@ -13,7 +14,7 @@
     padding: 10px;
     font-size: 30px;
     text-align: center;
-    min-width: 20vw;
+    /* min-width: 20vw; */
 }
 
 #exercise-component-numberpad>button:hover {
@@ -46,5 +47,9 @@
     #exercise-component-numberpad>button {
         height: 10vh;
         min-width: 30vw;
+    }
+
+    #exercise-component-numberpad {
+        width: 90vw;
     }
 }

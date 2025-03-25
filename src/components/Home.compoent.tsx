@@ -17,7 +17,7 @@ export const Home: React.FC<Props> = ({ setState, data, setData }) => {
         const exercises = generateExercises(data);
         setData(prevState => ({
             ...prevState,
-            exercises: exercises
+            exercises: exercises,
         }));
         setState(AppStages.EXERCISE);
     }
@@ -99,6 +99,21 @@ export const Home: React.FC<Props> = ({ setState, data, setData }) => {
                     square: !prevState.square
                 }))}>
                     Quadrate
+                </div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <Checkbox
+                    checked={data.audioOnly}
+                    onChange={() => setData(prevState => ({
+                        ...prevState,
+                        audioOnly: !prevState.audioOnly
+                    }))}
+                />
+                <div className='home-component-checkbox-text' onClick={() => setData(prevState => ({
+                    ...prevState,
+                    audioOnly: !prevState.audioOnly
+                }))}>
+                    Only audio
                 </div>
             </div>
             <div style={{ marginTop: '15px' }}>

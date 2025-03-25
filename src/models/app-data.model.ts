@@ -7,6 +7,7 @@ export interface AppDataModel {
     square: boolean;
     numExer: number;
     exercises: ExerciseModel[];
+    audioOnly: boolean;
     result: any;
 }
 
@@ -19,6 +20,7 @@ export const createAppDataModel = (data: Partial<AppDataModel>): AppDataModel =>
         square: data.square ?? false,
         numExer: data.numExer ?? 0,
         exercises: data.exercises ?? [],
+        audioOnly: data.audioOnly ?? false,
         result: data.result ?? null
     };
 };

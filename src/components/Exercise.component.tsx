@@ -77,7 +77,7 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
         <div>
             {currentExercise!! && (
                 <>
-                    <h1 id='exercise-component-exercise-display'>{currentExercise.display}</h1>
+                    <h1 id='exercise-component-exercise-display'>{!data.audioOnly && <>{currentExercise.display}</>}</h1>
                     <h1 id='exercise-component-exercise-input'> {userResult} </h1>
                     <div id="exercise-component-numberpad-box" style={{ background: background }}>
                         <div id="exercise-component-numberpad">
