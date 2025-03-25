@@ -25,8 +25,12 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
         if (exIndex === data.exercises.length) {
             setState(AppStages.RESULT);
         } else {
-            setCurrentExercise(data.exercises[exIndex]);
+            const newExercise = data.exercises[exIndex];
+            setCurrentExercise(newExercise);
             setExIndex(exIndex + 1);
+            if (data.audioOnly) {
+                speakExercise(newExercise.display);
+            }
         }
     }
 
@@ -70,6 +74,18 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
             exercises: []
         }));
         setState(AppStages.HOME);
+    }
+
+    const speakExercise = (text: string) => {
+        const voices = speechSynthesis.getVoices();
+        const germanVoice = voices.find(voice => voice.lang.startsWith("de"));
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "de-DE";
+        if (germanVoice) {
+            utterance.voice = germanVoice;
+        }
+        speechSynthesis.speak(utterance);
     }
 
     return <div>
