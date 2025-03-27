@@ -5,6 +5,7 @@ import { Button, IconButton, Table, TableBody, TableCell, TableContainer, TableH
 import Paper from '@mui/material/Paper';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
+import copyTextToClipboard from '@uiw/copy-to-clipboard';
 
 
 type Props = {
@@ -34,6 +35,21 @@ export const Result: React.FC<Props> = ({ setState, data, setData }) => {
             exercises: []
         }));
         setState(AppStages.HOME);
+    }
+
+    const copyTrainingResultToClipBoard = () => {
+        const trainingData: any = [];
+        data.exercises.forEach(exercise => {
+            if (exercise.resultCorrect) {
+                trainingData.push({
+                    input: exercise.learningModel,
+                    output: [exercise.timeElapsed]
+                });
+            }
+        });
+        const stringCopy = JSON.stringify(trainingData as any);
+        console.log(stringCopy)
+        copyTextToClipboard(stringCopy);
     }
 
     return <div>
@@ -89,6 +105,11 @@ export const Result: React.FC<Props> = ({ setState, data, setData }) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <div>
+                    <Button variant='contained' onClick={copyTrainingResultToClipBoard}>
+                        Copy training results to clip-board
+                    </Button>
+                </div>
             </div>
         </>}
         <div style={{ width: '100%', marginTop: '15px', display: 'flex', justifyContent: 'center' }}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppStages } from '../enum/stages.enum';
-import { Button, Checkbox, MenuItem, Select, TextField } from '@mui/material';
+import { Button, Checkbox, MenuItem, Select } from '@mui/material';
 import { AppDataModel } from '../models/app-data.model';
 import { generateExercises } from '../services/exercises-generator.service';
 import './home.component.css';

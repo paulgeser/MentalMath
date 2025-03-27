@@ -30,4 +30,6 @@ export interface ExerciseModel {
     expectedResult: number;
     userResult: number | null;
     resultCorrect: boolean;
+    learningModel: number[];
+    timeElapsed: number;
 }

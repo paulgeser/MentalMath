@@ -3,6 +3,7 @@ import { AppStages } from '../enum/stages.enum';
 import { AppDataModel, ExerciseModel } from '../models/app-data.model';
 import { Button } from '@mui/material';
 import './exercise.component.css';
+import { handlePredict } from '../services/exercise-timeevaluator.service';
 
 type Props = {
     setState: React.Dispatch<React.SetStateAction<AppStages>>;
@@ -16,6 +17,7 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
     const [exIndex, setExIndex] = useState<number>(0);
     const [userResult, setUserResult] = useState<string>('');
     const [background, setBackground] = useState<string>('unset');
+    const [startTime, setStartTime] = useState<Date>(new Date());
 
     useEffect(() => {
         setNextExercise();
@@ -25,12 +27,14 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
         if (exIndex === data.exercises.length) {
             setState(AppStages.RESULT);
         } else {
+            setStartTime(new Date());
             const newExercise = data.exercises[exIndex];
             setCurrentExercise(newExercise);
             setExIndex(exIndex + 1);
             if (data.audioOnly) {
                 speakExercise(newExercise.display);
             }
+            handlePredict(newExercise.display);
         }
     }
 
@@ -49,11 +53,15 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
     const evaluate = () => {
         if (currentExercise) {
             const userInput = Number(userResult);
+            const endTime = new Date();
+            var timeDiff = endTime.getTime() - startTime.getTime();
+
+            timeDiff /= 1000;
             setData(prevState => ({
                 ...prevState,
                 exercises: prevState.exercises.map((exercise, index) =>
                     index === (exIndex - 1)
-                        ? { ...exercise, userResult: userInput, resultCorrect: currentExercise.expectedResult === userInput } // Update only this one
+                        ? { ...exercise, userResult: userInput, resultCorrect: currentExercise.expectedResult === userInput, timeElapsed: Math.round(timeDiff) } // Update only this one
                         : exercise
                 )
             }));
