@@ -1,11 +1,15 @@
+import { ExerciseModel } from './../models/app-data.model';
+import { TrainingModel } from './../models/training.model';
 import React, { useState } from "react";
 import { NeuralNetwork } from "brain.js";
-import customData from '../training-data.json';
+import trainingJSON from '../training-data.json';
+import { generateExercises } from './exercises-generator.service';
+import { createAppDataModel } from '../models/app-data.model';
 
-console.log(customData);
+const trainingData: TrainingModel[] = trainingJSON;
 
 // Normalize data (scale down inputs and outputs)
-const normalizedData = customData.map(({ input, output }) => ({
+const normalizedData = trainingData.map(({ input, output }) => ({
     input: input.map(x => x / 100),  // Scale numbers
     output: output.map(x => x / 100)   // Scale time to [0-1] seconds
 }));
@@ -14,6 +18,26 @@ const normalizedData = customData.map(({ input, output }) => ({
 const net = new NeuralNetwork();
 net.train(normalizedData);
 
+const generatedExercises: ExerciseModel[] = generateExercises(createAppDataModel({
+    smallAddSub: true,
+    largeAddSub: true,
+    smallMulDiv: true,
+    largeMulDiv: true,
+    square: true,
+    numExer: 30
+}));
+
+const mapResult = generatedExercises.map(exercise => {
+
+    const result: Float32Array = net.run(exercise.learningModel) as any;
+    if (result && result[0]) {
+        console.log(exercise.display, result[0])
+
+    }
+    return result;
+})
+
+console.log(mapResult);
 
 // Function to parse input and predict time
 export const handlePredict = (expression: string): number => {
