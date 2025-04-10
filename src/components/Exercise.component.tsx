@@ -34,7 +34,8 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
             if (data.audioOnly) {
                 speakExercise(newExercise.display);
             }
-            handlePredict(newExercise.display);
+            console.log(newExercise.learningModel);
+            handlePredict(newExercise.learningModel);
         }
     }
 

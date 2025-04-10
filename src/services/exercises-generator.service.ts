@@ -38,7 +38,7 @@ const getRandomNumber = (min: number, max: number): number =>
     return { display, expectedResult, userResult: null, resultCorrect: false };
 };
  */
-const generateSmallAdd = (): ExerciseModel => {
+export const generateSmallAdd = (): ExerciseModel => {
     const num1 = getRandomNumber(5, 100);
     const num2 = getRandomNumber(5, 100);
     return {
@@ -48,7 +48,7 @@ const generateSmallAdd = (): ExerciseModel => {
     };
 };
 
-const generateSmallSub = (): ExerciseModel => {
+export const generateSmallSub = (): ExerciseModel => {
     const num1 = getRandomNumber(5, 100);
     const num2 = getRandomNumber(5, 100);
     return {
@@ -58,7 +58,7 @@ const generateSmallSub = (): ExerciseModel => {
     };
 };
 
-const generateSmallMul = (): ExerciseModel => {
+export const generateSmallMul = (): ExerciseModel => {
     const num1 = getRandomNumber(1, 15);
     const num2 = getRandomNumber(4, 30);
     return {
@@ -68,7 +68,7 @@ const generateSmallMul = (): ExerciseModel => {
     };
 };
 
-const generateSmallDiv = (): ExerciseModel => {
+export const generateSmallDiv = (): ExerciseModel => {
     const num2 = getRandomNumber(1, 10);
     const result = getRandomNumber(1, 10);
     const num1 = num2 * result;
@@ -79,7 +79,7 @@ const generateSmallDiv = (): ExerciseModel => {
     };
 };
 
-const generateLargeAdd = (): ExerciseModel => {
+export const generateLargeAdd = (): ExerciseModel => {
     const num1 = getRandomNumber(100, 999);
     const num2 = getRandomNumber(100, 999);
     return {
@@ -89,7 +89,7 @@ const generateLargeAdd = (): ExerciseModel => {
     };
 };
 
-const generateLargeSub = (): ExerciseModel => {
+export const generateLargeSub = (): ExerciseModel => {
     const num1 = getRandomNumber(100, 999);
     const num2 = getRandomNumber(100, num1);
     return {
@@ -99,7 +99,7 @@ const generateLargeSub = (): ExerciseModel => {
     };
 };
 
-const generateLargeMul = (): ExerciseModel => {
+export const generateLargeMul = (): ExerciseModel => {
     const num1 = getRandomNumber(10, 99);
     const num2 = getRandomNumber(10, 99);
     return {
@@ -109,7 +109,7 @@ const generateLargeMul = (): ExerciseModel => {
     };
 };
 
-const generateLargeDiv = (): ExerciseModel => {
+export const generateLargeDiv = (): ExerciseModel => {
     const num2 = getRandomNumber(10, 99);
     const result = getRandomNumber(10, 99);
     const num1 = num2 * result;
@@ -120,23 +120,23 @@ const generateLargeDiv = (): ExerciseModel => {
     };
 };
 
-const generateSquare = (): ExerciseModel => {
-    const randomNum = getRandomNumber(0, 1);
-    if (randomNum === 0) {
-        const num1 = getRandomNumber(2, 10);
-        return {
-            display: `${num1}³`, expectedResult: num1 * num1 * num1, userResult: null, resultCorrect: false,
-            learningModel: [num1, 0, 6],
-            timeElapsed: -1
-        };
-    } else {
-        const num1 = getRandomNumber(2, 25);
-        return {
-            display: `${num1}²`, expectedResult: num1 * num1, userResult: null, resultCorrect: false,
-            learningModel: [num1, 0, 5],
-            timeElapsed: -1
-        };
-    }
+export const generateSquare = (): ExerciseModel => {
+    const num1 = getRandomNumber(2, 25);
+    return {
+        display: `${num1}²`, expectedResult: num1 * num1, userResult: null, resultCorrect: false,
+        learningModel: [num1, 0.1, 5],
+        timeElapsed: -1
+    };
+};
+
+export const generateCube = (): ExerciseModel => {
+    const num1 = getRandomNumber(2, 10);
+    return {
+        display: `${num1}³`, expectedResult: num1 * num1 * num1, userResult: null, resultCorrect: false,
+        learningModel: [num1, 0.1, 6],
+        timeElapsed: -1
+    };
+
 };
 
 // Modify the generateExercises function to include the new exercises
@@ -164,6 +164,7 @@ export const generateExercises = (data: AppDataModel): ExerciseModel[] => {
     }
     if (data.square) {
         operations["square"] = generateSquare;
+        operations["cube"] = generateCube;
     }
 
     const operationKeys = Object.keys(operations);
