@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AppStages } from '../enum/stages.enum';
 import { AppDataModel, ExerciseModel } from '../models/app-data.model';
-import { Button } from '@mui/material';
+import { Box, Button, Modal, Typography } from '@mui/material';
 import './exercise.component.css';
 import { handlePredict } from '../services/exercise-timeevaluator.service';
 
@@ -18,12 +18,17 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
     const [userResult, setUserResult] = useState<string>('');
     const [background, setBackground] = useState<string>('unset');
     const [startTime, setStartTime] = useState<Date>(new Date());
+    const [timeOutSound, setTimeOutSound] = useState<NodeJS.Timeout | null>(null);
+    const [timeOutPopup, setTimeOutPopup] = useState<NodeJS.Timeout | null>(null);
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
+
 
     useEffect(() => {
         setNextExercise();
     }, []);
 
     const setNextExercise = () => {
+        cancelTimers();
         if (exIndex === data.exercises.length) {
             setState(AppStages.RESULT);
         } else {
@@ -35,9 +40,39 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
                 speakExercise(newExercise.display);
             }
             console.log(newExercise.learningModel);
-            handlePredict(newExercise.learningModel);
+            startTimingWorkflow(newExercise);
         }
     }
+
+    const playSound = () => {
+        const audio = new Audio(`${process.env.PUBLIC_URL}/beep.mp3`);
+        audio.play().catch((error) => console.error('Audio play failed:', error));
+    };
+
+    const startTimingWorkflow = (newExercise: ExerciseModel) => {
+        const waitTime = handlePredict(newExercise.learningModel);
+
+        // First timeout: play sound when time is up
+        const soundTimer = setTimeout(() => {
+            playSound();
+
+            // Second timeout: 5s after the sound, show popup
+            const popupTimer = setTimeout(() => {
+                setModalOpen(true);
+            }, 5000);
+
+            setTimeOutPopup(popupTimer);
+        }, waitTime * 1000 + 1500);
+
+        setTimeOutSound(soundTimer);
+    };
+
+    const cancelTimers = () => {
+        if (timeOutSound) clearTimeout(timeOutSound);
+        if (timeOutPopup) clearTimeout(timeOutPopup);
+        setTimeOutSound(null);
+        setTimeOutPopup(null);
+    };
 
     const addResultNumber = (value: number) => {
         setUserResult(`${userResult}${value}`);
@@ -97,6 +132,28 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
         speechSynthesis.speak(utterance);
     }
 
+    const handleClose = () => {
+        setModalOpen(false);
+        evaluate();
+    }
+
+    const handleCloseStay = () => {
+        setModalOpen(false);
+    }
+
+    const styleModal = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        minWidth: 280,
+        width: '50%',
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
+
     return <div>
 
         <div>
@@ -126,6 +183,26 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
                     </div>
                 </>
             )}
+            <Modal
+                open={modalOpen}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={styleModal}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Your time is up!!
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        <Button variant='outlined' onClick={handleCloseStay}>
+                            Continue here
+                        </Button>
+                        <Button variant='contained' onClick={handleClose}>
+                            Go to next
+                        </Button>
+                    </Typography>
+                </Box>
+            </Modal>
         </div>
     </div>
 };

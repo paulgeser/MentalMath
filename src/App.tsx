@@ -3,7 +3,7 @@ import './App.css';
 import { AppStages } from './enum/stages.enum';
 import { Home } from './components/Home.compoent';
 import { Result } from './components/Result.component';
-import { Exercise } from './components/Exercise.component';
+import { Exercise } from './components/exercise.component';
 import { AppDataModel, createAppDataModel } from './models/app-data.model';
 
 type Props = {
