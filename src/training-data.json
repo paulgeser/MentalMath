@@ -588,5 +588,6 @@
         "output": [
             8
         ]
-    }
+    },
+    {"input":[9,3,4],"output":[2]},{"input":[21,0.1,5],"output":[8]},{"input":[86,61,1],"output":[5]},{"input":[360,788,1],"output":[9]},{"input":[11,10,3],"output":[3]},{"input":[52,68,3],"output":[37]},{"input":[840,922,1],"output":[8]},{"input":[10,75,3],"output":[3]},{"input":[801,368,1],"output":[7]},{"input":[779,371,1],"output":[9]},{"input":[55,61,1],"output":[6]},{"input":[5,0.1,6],"output":[4]},{"input":[9,0.1,6],"output":[4]},{"input":[2,0.1,6],"output":[2]},{"input":[1088,16,4],"output":[25]},{"input":[98,41,3],"output":[14]},{"input":[325,120,2],"output":[7]},{"input":[6,3,4],"output":[3]},{"input":[12,6,4],"output":[2]},{"input":[77,82,1],"output":[5]},{"input":[43,70,2],"output":[6]},{"input":[75,22,2],"output":[6]},{"input":[80,45,3],"output":[25]},{"input":[4,17,3],"output":[5]},{"input":[72,8,4],"output":[2]},{"input":[10,0.1,5],"output":[2]},{"input":[20,0.1,5],"output":[3]},{"input":[90,32,2],"output":[4]},{"input":[19,55,2],"output":[8]},{"input":[40,11,1],"output":[2]},{"input":[6,0.1,6],"output":[3]},{"input":[551,184,2],"output":[14]},{"input":[357,21,4],"output":[10]},{"input":[9,0.1,6],"output":[3]},{"input":[75,86,3],"output":[13]},{"input":[8,0.1,6],"output":[7]},{"input":[13,40,1],"output":[3]}
 ]
