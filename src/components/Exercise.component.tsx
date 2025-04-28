@@ -22,7 +22,6 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
     const [timeOutPopup, setTimeOutPopup] = useState<NodeJS.Timeout | null>(null);
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-
     useEffect(() => {
         setNextExercise();
     }, []);

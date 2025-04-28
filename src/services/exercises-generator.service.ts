@@ -121,7 +121,7 @@ export const generateLargeDiv = (): ExerciseModel => {
 };
 
 export const generateSquare = (): ExerciseModel => {
-    const num1 = getRandomNumber(2, 25);
+    const num1 = getRandomNumber(2, 30);
     return {
         display: `${num1}²`, expectedResult: num1 * num1, userResult: null, resultCorrect: false,
         learningModel: [num1, 0.1, 5],

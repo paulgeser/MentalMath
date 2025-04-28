@@ -68,7 +68,7 @@ do {
             const result: Float32Array = net.run(normPreparedEntry) as any;
             return Number(result[0]);
         });
-        if (median(result) == 0) { // Break everything if output is zero (bad case)
+        if (median(result) === 0) { // Break everything if output is zero (bad case)
             neuralNetworkReady = false;
             break;
         }
