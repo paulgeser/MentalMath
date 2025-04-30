@@ -110,7 +110,7 @@ export const generateLargeMul = (): ExerciseModel => {
 };
 
 export const generateLargeDiv = (): ExerciseModel => {
-    const num2 = getRandomNumber(10, 99);
+    const num2 = getRandomNumber(5, 20);
     const result = getRandomNumber(10, 99);
     const num1 = num2 * result;
     return {
