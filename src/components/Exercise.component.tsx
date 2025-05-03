@@ -174,11 +174,11 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
                             <button onClick={() => addResultNumber(0)}>0</button>
                             <button onClick={changePosNeg}>+/-</button>
                             <button onClick={removeLast}>Del</button>
-                            <button onClick={evaluate} id="submit" style={{ gridColumn: 'span 3' }} >Submit</button>
+                            <button onClick={evaluate} id="submit" style={{ gridColumn: 'span 3' }} >Absenden</button>
                         </div>
                     </div>
                     <div style={{ width: '100%', marginTop: '5px', display: 'flex', justifyContent: 'center' }}>
-                        <Button variant='contained' onClick={() => backToHome()}>Back to home</Button>
+                        <Button variant='contained' onClick={() => backToHome()}>Zurück zur Homepage</Button>
                     </div>
                 </>
             )}
@@ -190,14 +190,14 @@ export const Exercise: React.FC<Props> = ({ setState, data, setData }) => {
             >
                 <Box sx={styleModal}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Your time is up!!
+                        Die Zeit ist abgelaufen!!
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                         <Button variant='outlined' onClick={handleCloseStay}>
-                            Continue here
+                            Weiter hier bleiben
                         </Button>
                         <Button variant='contained' onClick={handleClose}>
-                            Go to next
+                            Zur nächsten Aufgabe
                         </Button>
                     </Typography>
                 </Box>

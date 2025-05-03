@@ -54,12 +54,16 @@ export const Result: React.FC<Props> = ({ setState, data, setData }) => {
 
     return <div>
         {results.length === 0 && <>
-            <b>Exercise number was set to 0, so no exercises were created!!</b>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <p style={{ maxWidth: '500px', textAlign: 'center' }}>
+                    <b>Anzahl von Aufgaben wurde entweder auf 0 gesetzt oder kein Aufgabentyp wurde ausgewählt. Aufgrund dessen konnten keine Aufgaben generiert werden!</b>
+                </p>
+            </div>
         </>}
         {results.length > 0 && <>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <p style={{ textAlign: 'center' }}>
-                    Your results are as follows:
+                    Das sind deine Resultate:
                     <br />
                     <b>{resultPercentage}%</b>
                 </p>
@@ -67,9 +71,9 @@ export const Result: React.FC<Props> = ({ setState, data, setData }) => {
                     <Table sx={{ minWidth: 350, maxWidth: 1000 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Exercise</TableCell>
-                                <TableCell align="right">Correct</TableCell>
-                                <TableCell align="right">Yours</TableCell>
+                                <TableCell>Aufgabe</TableCell>
+                                <TableCell align="right">Korrekte Lösung</TableCell>
+                                <TableCell align="right">Deine Lösung</TableCell>
                                 <TableCell align="right"></TableCell>
                             </TableRow>
                         </TableHead>
@@ -107,13 +111,13 @@ export const Result: React.FC<Props> = ({ setState, data, setData }) => {
                 </TableContainer>
                 <div>
                     <Button variant='contained' onClick={copyTrainingResultToClipBoard}>
-                        Copy training results to clip-board
+                        Kopiere Training-Resultate in die Zwischenspeicherablage
                     </Button>
                 </div>
             </div>
         </>}
         <div style={{ width: '100%', marginTop: '15px', display: 'flex', justifyContent: 'center' }}>
-            <Button variant='contained' onClick={() => backToHome()}>Back to home</Button>
+            <Button variant='contained' onClick={() => backToHome()}>Zurück zur Homepage</Button>
         </div>
     </div>
 };
